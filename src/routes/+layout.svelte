@@ -1,6 +1,7 @@
 <script lang="ts">
 	import "$lib/utilities/stylesheets/stylesheets.css"
 	import Background from "$lib/components/Background.svelte"
+	import { onMount } from "svelte"
 	let mouse = false
 </script>
 
