@@ -34,7 +34,7 @@
 			return out
 		}
 
-		let stars = makeStars(10000)
+		let stars = makeStars(500)
 
 		const clear = () => {
 			c.fillStyle = "black"
@@ -45,7 +45,7 @@
 			const intensity = brightness * 255
 			const rgb = "rgb(" + intensity + "," + intensity + "," + intensity + ")"
 			c.fillStyle = rgb
-			c.fillText("X", x, y)
+			c.fillText("svelte", x, y)
 		}
 
 		const moveStars = (distance: number) => {
