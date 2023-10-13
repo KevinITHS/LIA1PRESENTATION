@@ -13,6 +13,10 @@
 	$: allowNextSlide = !(slideNumber >= MAX_SLIDE_NUMBER)
 	$: previousSlideURL = `/slide/${slideNumber - 1}`
 	$: nextSlideURL = `/slide/${slideNumber + 1}`
+	$: if ($slideTimer === 0 && allowNextSlide) {
+		goto(nextSlideURL)
+		slideTimer.reset()
+	}
 
 	onMount(() => {
 		slideTimer.start()
