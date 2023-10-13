@@ -28,8 +28,6 @@
 	})
 </script>
 
-{$slideTimer}
-
 <svelte:body
 	on:keydown={(event) => {
 		const { key } = event
@@ -45,6 +43,10 @@
 
 <div class="height-100p grid-stack">
 	<slot />
+
+	<span id="slide-timer">{$slideTimer}</span>
+	<span id="slide-number">{slideNumber}</span>
+
 	<div id="hover-container">
 		<div>
 			<button on:click={slideTimer.reset}>RESET</button>
@@ -80,5 +82,29 @@
 
 	#hover-container:hover > div {
 		scale: 1;
+	}
+
+	#slide-timer {
+		place-self: start start;
+		animation: rotate 20s linear infinite reverse;
+	}
+
+	#slide-number {
+		place-self: start end;
+		animation: rotate 20s linear infinite;
+	}
+
+	#slide-number,
+	#slide-timer {
+		opacity: 0.8;
+		margin: 1em;
+	}
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
 	}
 </style>
