@@ -41,28 +41,26 @@
 		}
 	}} />
 
-<div class="height-100p grid-stack">
-	<slot />
+<slot />
 
-	<span id="slide-timer">{$slideTimer}</span>
-	<span id="slide-number">{slideNumber}</span>
+<span id="slide-timer">{$slideTimer}</span>
+<span id="slide-number">{slideNumber}</span>
 
-	<div id="hover-container">
-		<div>
-			<button on:click={slideTimer.reset}>RESET</button>
-			<button on:click={slideTimer.start}>START</button>
-			<button on:click={slideTimer.stop}>STOP</button>
-		</div>
+<div id="hover-container">
+	<div>
+		<button on:click={slideTimer.reset}>RESET</button>
+		<button on:click={slideTimer.start}>START</button>
+		<button on:click={slideTimer.stop}>STOP</button>
+	</div>
 
-		<div>
-			{#if !(slideNumber <= MIN_SLIDE_NUMBER)}
-				<a href={previousSlideURL}>Previous</a>
-			{/if}
+	<div>
+		{#if !(slideNumber <= MIN_SLIDE_NUMBER)}
+			<a href={previousSlideURL}>Previous</a>
+		{/if}
 
-			{#if !(slideNumber >= MAX_SLIDE_NUMBER)}
-				<a href={nextSlideURL}>Next</a>
-			{/if}
-		</div>
+		{#if !(slideNumber >= MAX_SLIDE_NUMBER)}
+			<a href={nextSlideURL}>Next</a>
+		{/if}
 	</div>
 </div>
 
@@ -98,6 +96,8 @@
 	#slide-timer {
 		opacity: 0.8;
 		margin: 1em;
+		font-size: 30px;
+		font-weight: 500;
 	}
 	@keyframes rotate {
 		from {
