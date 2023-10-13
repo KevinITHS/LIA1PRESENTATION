@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { slideTimer } from "$lib/utilities/stores/slideTimer"
+</script>
+
 <main class="height-100p">
 	<div>
 		<h1>2023-10-17</h1>

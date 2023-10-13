@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation"
 	import { page } from "$app/stores"
+	import { slideTimer } from "$lib/utilities/stores/slideTimer"
 	const MIN_SLIDE_NUMBER = 1
 	const MAX_SLIDE_NUMBER = 20
 	$: slideNumber = Number($page.params.slideNumber)
@@ -10,6 +11,10 @@
 	$: nextSlideURL = `/slide/${slideNumber + 1}`
 </script>
 
+{$slideTimer}
+<button on:click={slideTimer.reset}>RESET</button>
+<button on:click={slideTimer.start}>START</button>
+<button on:click={slideTimer.stop}>STOP</button>
 <svelte:body
 	on:keydown={(event) => {
 		const { key } = event
