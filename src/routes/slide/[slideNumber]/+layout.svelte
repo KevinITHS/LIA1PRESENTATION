@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { onDestroy, onMount } from "svelte"
-
 	import { goto } from "$app/navigation"
 	import { page } from "$app/stores"
 	import { slideTimer } from "$lib/utilities/stores/slideTimer"
+	import { onDestroy, onMount } from "svelte"
 
 	const MIN_SLIDE_NUMBER = 1
 	const MAX_SLIDE_NUMBER = 20
@@ -13,6 +12,7 @@
 	$: allowNextSlide = !(slideNumber >= MAX_SLIDE_NUMBER)
 	$: previousSlideURL = `/slide/${slideNumber - 1}`
 	$: nextSlideURL = `/slide/${slideNumber + 1}`
+
 	$: if ($slideTimer === 0 && allowNextSlide) {
 		goto(nextSlideURL)
 		slideTimer.reset()
@@ -29,9 +29,6 @@
 </script>
 
 {$slideTimer}
-<button on:click={slideTimer.reset}>RESET</button>
-<button on:click={slideTimer.start}>START</button>
-<button on:click={slideTimer.stop}>STOP</button>
 
 <svelte:body
 	on:keydown={(event) => {
@@ -49,30 +46,39 @@
 <div class="height-100p grid-stack">
 	<slot />
 	<div id="hover-container">
-		{#if !(slideNumber <= MIN_SLIDE_NUMBER)}
-			<a href={previousSlideURL}>Previous</a>
-		{/if}
+		<div>
+			<button on:click={slideTimer.reset}>RESET</button>
+			<button on:click={slideTimer.start}>START</button>
+			<button on:click={slideTimer.stop}>STOP</button>
+		</div>
 
-		{#if !(slideNumber >= MAX_SLIDE_NUMBER)}
-			<a href={nextSlideURL}>Next</a>
-		{/if}
+		<div>
+			{#if !(slideNumber <= MIN_SLIDE_NUMBER)}
+				<a href={previousSlideURL}>Previous</a>
+			{/if}
+
+			{#if !(slideNumber >= MAX_SLIDE_NUMBER)}
+				<a href={nextSlideURL}>Next</a>
+			{/if}
+		</div>
 	</div>
 </div>
 
 <style>
 	#hover-container {
 		place-self: start center;
-		display: flex;
-		gap: 1rem;
+		gap: 1em;
 	}
 
-	#hover-container > a {
+	#hover-container > div {
+		display: flex;
+		gap: 1em;
+		place-content: center;
 		scale: 0;
-		display: block;
 		transition: scale 0.2s ease-in-out;
 	}
 
-	#hover-container:hover > a {
+	#hover-container:hover > div {
 		scale: 1;
 	}
 </style>
