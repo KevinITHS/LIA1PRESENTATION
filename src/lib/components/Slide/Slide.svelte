@@ -3,7 +3,7 @@
 
 	export let slideNumber: string
 
-	function getSlideCOmponent(slideNumber: string) {
+	function getSlideComponent(slideNumber: string) {
 		switch (slideNumber) {
 			case "1":
 				return Slide1
@@ -13,4 +13,4 @@
 	}
 </script>
 
-<svelte:component this={getSlideCOmponent(slideNumber)} />
+<svelte:component this={getSlideComponent(slideNumber)} />
