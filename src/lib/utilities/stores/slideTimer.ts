@@ -23,7 +23,7 @@ function createSlideTimer() {
 				}
 				return previousValue - 1
 			})
-		}, 10000) //change to 100ms
+		}, 1000)
 	}
 
 	function reset() {
