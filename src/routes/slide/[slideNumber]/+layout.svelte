@@ -1,20 +1,34 @@
 <script lang="ts">
+	import { onDestroy, onMount } from "svelte"
+
 	import { goto } from "$app/navigation"
 	import { page } from "$app/stores"
 	import { slideTimer } from "$lib/utilities/stores/slideTimer"
+
 	const MIN_SLIDE_NUMBER = 1
 	const MAX_SLIDE_NUMBER = 20
+
 	$: slideNumber = Number($page.params.slideNumber)
 	$: allowPreviousSlide = !(slideNumber <= MIN_SLIDE_NUMBER)
 	$: allowNextSlide = !(slideNumber >= MAX_SLIDE_NUMBER)
 	$: previousSlideURL = `/slide/${slideNumber - 1}`
 	$: nextSlideURL = `/slide/${slideNumber + 1}`
+
+	onMount(() => {
+		slideTimer.start()
+	})
+
+	onDestroy(() => {
+		slideTimer.stop()
+		slideTimer.reset()
+	})
 </script>
 
 {$slideTimer}
 <button on:click={slideTimer.reset}>RESET</button>
 <button on:click={slideTimer.start}>START</button>
 <button on:click={slideTimer.stop}>STOP</button>
+
 <svelte:body
 	on:keydown={(event) => {
 		const { key } = event
